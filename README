@@ -1,0 +1,12 @@
+Two programs, 
+yt-tedx1.py: to get tedxvideos from youtube
+parse_tedxvid.py: to get top count
+requires gdata py lib for youtube api, http://code.google.com/apis/gdata/articles/python_client_lib.html
+amitch@rajgad.com, dec 2011 
+
+#Get videos and store in file, includes title, viewcount & uri
+python ./yt-tedx1.py 1000 > tedxtalks-vids-1k.txt
+head -n 500  tedxtalks-vids-1k.txt > tedxtalks-vids-500.txt
+
+Parse file tedxtalks-vids-1k.txt to get top 11 conferences
+python parse_tedxvid.py tedxtalks-vids-500.txt 11 > conf-11-tedxtalks500.txt
