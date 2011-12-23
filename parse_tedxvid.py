@@ -1,4 +1,3 @@
-
 import sys;
 from heapq import *;
 
@@ -30,8 +29,8 @@ class ParseTEDxVideos:
 
       # Remove count
       for i in range(count):
-        views, conference, conferenceuri = heappop(h)
-        print '%s,%d,%s' %(conference, -1*views, conferenceuri)
+        talkscount, conference, conferenceuri = heappop(h)
+        print '%s,%d,%s' %(conference, -1*talkscount, conferenceuri)
       
 # -----------------------------------------------------------------------------------------------
 # The main entry point
