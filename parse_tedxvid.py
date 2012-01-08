@@ -37,9 +37,8 @@ class ParseTEDxVideos:
 
       # Remove count
       for i in range(count):
-        views, conference, conferenceuri = heappop(h)
-        topconf.append('%s,%d,%s' %(conference, -1*views, conferenceuri))
-        #print '%s,%d,%s' %(conference, -1*views, conferenceuri)
+        talkscount, conference, conferenceuri = heappop(h)
+        topconf.append('%s,%d,%s' %(conference, -1*talkscount, conferenceuri))
         
       return topconf
       
