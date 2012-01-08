@@ -1,19 +1,26 @@
+# Class to parse TEDx Videos from youtube
+# Copyright, amitch@rajgad.com, 2011
 
 import sys;
 from heapq import *;
 
 class ParseTEDxVideos:
   vidfile = ''
-  def __init__(self, vidfile):
-      self.vidfile = vidfile
-      self.file = open(vidfile, "r")
+  def __init__(self, vidfile=None):
+      if vidfile is not None:
+          self.vidfile = vidfile
+          self.file = open(vidfile, "r")
 
 
-  def printtopconf(self, count=10):
-      conferences = {}    
+  def gettopconf(self, count=10, conflist=None):
+      conferences = {}
+      topconf = []  
 
+      if conflist is None:
+          conflist = self.file
+          
       # Each line is a conference, store in a directory, increasing counts subsequently
-      for line in self.file:
+      for line in conflist:
         conference = line.split()[0]
         if conferences.has_key(conference):
           conference_item = conferences[conference]
@@ -31,7 +38,10 @@ class ParseTEDxVideos:
       # Remove count
       for i in range(count):
         views, conference, conferenceuri = heappop(h)
-        print '%s,%d,%s' %(conference, -1*views, conferenceuri)
+        topconf.append('%s,%d,%s' %(conference, -1*views, conferenceuri))
+        #print '%s,%d,%s' %(conference, -1*views, conferenceuri)
+        
+      return topconf
       
 # -----------------------------------------------------------------------------------------------
 # The main entry point
@@ -44,7 +54,8 @@ def main():
       count = sys.argv[2]
     
   parsevid = ParseTEDxVideos(vidfile)
-  parsevid.printtopconf(int(count))
+  for conf in parsevid.gettopconf(int(count)):
+      print conf
   
 if __name__ == "__main__":
     main()
